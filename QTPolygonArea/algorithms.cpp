@@ -4,6 +4,7 @@ Algorithms::Algorithms() {}
 
 double Algorithms::LH(const std::vector<QPoint> &points)
 {
+    //Polygon area
     const unsigned int n = points.size();
     double area = 0;
     for (int i = 1; i < n - 1; i++)
