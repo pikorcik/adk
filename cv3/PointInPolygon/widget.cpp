@@ -16,15 +16,18 @@ Widget::~Widget()
 
 void Widget::on_pushButton_2_clicked()
 {
+    ui->Canvas->setStatus(false);
     ui->Canvas->clear();
 }
 
 void Widget::on_pushButton_3_clicked()
 {
     int result;
+    QPoint q = ui->Canvas->getQ();
+
     std::vector<QPoint> points;
     points = ui->Canvas->getPoints();
-    QPoint q = ui->Canvas->getQ();
+
     if(ui->comboBox->currentIndex() == 0)
         result = algorithms::getWindingPos(q, points);
     else

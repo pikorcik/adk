@@ -35,8 +35,9 @@ double algorithms::getAngle(QPoint &p1,QPoint &p2,QPoint &p3, QPoint &p4)
     double normV = sqrt(vx * vx + vy * vy);
 
     double test =  (acos(s/(normU * normV)))*(180/M_PI);
-    return (acos(s/(normU * normV)))*(180/M_PI);
+    return fabs(acos(s/(normU * normV)))*(180/M_PI);
 }
+
 
 int algorithms::getWindingPos(QPoint &q, std::vector<QPoint> pol)
 {
@@ -65,7 +66,7 @@ int algorithms::getWindingPos(QPoint &q, std::vector<QPoint> pol)
     }
 
     //Difference from 2 * PI
-    double omt = om-360.0;
+    double omt = fabs(om)-360.0;
 
     //POint q inside P
     if (fabs(omt)<eps)
