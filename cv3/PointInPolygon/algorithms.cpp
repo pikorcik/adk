@@ -34,5 +34,88 @@ double algorithms::getAngle(QPoint &p1,QPoint &p2,QPoint &p3, QPoint &p4)
     double normU = sqrt(ux * ux + uy * uy);
     double normV = sqrt(vx * vx + vy * vy);
 
+    double test =  (acos(s/(normU * normV)))*(180/M_PI);
     return (acos(s/(normU * normV)))*(180/M_PI);
 }
+
+int algorithms::getWindingPos(QPoint &q, std::vector<QPoint> pol)
+{
+    double om=0.0;
+    double eps = 1.0e-6;
+
+    //Add first point as the last one
+    pol.push_back(pol[0]);
+
+    //Process all polygon segments
+    for (int i=0;i<pol.size()-1;i++)
+    {
+        //Get angle
+        double om_l=getAngle(pol[i], q, pol[i+1], q);
+
+        //Get position
+        int t = getPosition(q, pol[i], pol[i+1]);
+
+        //Point q in the left halfplane
+        if(t > 0)
+            om += om_l;
+
+        //Point in the right halfplane
+        else
+            om -= om_l;
+    }
+
+    //Difference from 2 * PI
+    double omt = om-360.0;
+
+    //POint q inside P
+    if (fabs(omt)<eps)
+        return 1;
+
+    //Point q outside P
+    else
+        return 0;
+
+}
+
+int algorithms::getRayPos(Qpoint &q, std::vector<QPoint> pol){
+
+    int k=0;
+
+    //Add first point as the last one
+    pol.push_back(pol[0]);
+
+    //Process all polygon segments
+    for (int i=0;i<pol.size()-1;i++)
+    {
+        //Get reduced points of the line segment
+        double xi = pol[i].x()-q.x();
+        double yi = pol[i].y()-q.y();
+        double xii= pol[i+1].x()-q.x();
+        double yii= pol[i+1].y()-q.y();
+
+        //A suitable line segment
+        if((yi<=0)&&(yii>0)||(yii<=0)&&(yi>0))
+        {
+            //Point inn the right halfplane
+            double xn = (xii*yi - xi*yii)/(yii - yi);
+            if (xn > 0)
+                k++;
+        }
+    }
+
+    int z = k % 2;
+
+    if (z==0)
+        return 0;
+    else
+        return 1;
+}
+
+
+
+
+
+
+
+
+
