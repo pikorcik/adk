@@ -77,7 +77,7 @@ int algorithms::getWindingPos(QPoint &q, std::vector<QPoint> pol)
 
 }
 
-int algorithms::getRayPos(Qpoint &q, std::vector<QPoint> pol){
+int algorithms::getRayPos(QPoint &q, std::vector<QPoint> pol){
 
     int k=0;
 

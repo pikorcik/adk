@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include "algorithms.h"
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -11,4 +12,29 @@ Widget::Widget(QWidget *parent) :
 Widget::~Widget()
 {
     delete ui;
+}
+
+void Widget::on_pushButton_2_clicked()
+{
+    ui->Canvas->clear();
+}
+
+void Widget::on_pushButton_3_clicked()
+{
+    int result;
+    std::vector<QPoint> points;
+    points = ui->Canvas->getPoints();
+    QPoint q = ui->Canvas->getQ();
+    if(ui->comboBox->currentIndex() == 0)
+        result = algorithms::getWindingPos(q, points);
+    else
+        result = algorithms::getRayPos(q, points);
+
+    ui->label_2->setText(QString::number(result));
+
+}
+
+void Widget::on_pushButton_4_clicked()
+{
+    ui->Canvas->setStatus(true);
 }

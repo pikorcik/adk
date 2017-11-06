@@ -1,3 +1,4 @@
+
 #include "widget.h"
 #include <QApplication>
 #include <vector>
@@ -14,10 +15,10 @@ int main(int argc, char *argv[])
     pol.push_back(QPoint(0,10));
 
     //Create tested point
-    QPoint q(2.5,5);
+    QPoint q(10,5);
 
     //Test point and polygon position
-    int t0 = algorithms::getWindingPos(q,pol);
+    int t0 = algorithms::getRayPos(q,pol);
 
     //Simple test: position
     QPoint p(5,-5);
