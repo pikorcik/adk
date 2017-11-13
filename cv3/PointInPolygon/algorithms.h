@@ -1,6 +1,7 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 #include <QPoint>
+#include <vector>
 
 
 class algorithms

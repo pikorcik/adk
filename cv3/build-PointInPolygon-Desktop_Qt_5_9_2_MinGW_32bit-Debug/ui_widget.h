@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'widget.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.1
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -34,9 +34,11 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *pushButton;
     QPushButton *pushButton_4;
+    QSpacerItem *verticalSpacer_3;
+    QLabel *label_3;
     QComboBox *comboBox;
-    QPushButton *pushButton_3;
     QSpacerItem *verticalSpacer;
+    QPushButton *pushButton_3;
     QLabel *label;
     QLabel *label_2;
     QSpacerItem *verticalSpacer_2;
@@ -46,7 +48,7 @@ public:
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QStringLiteral("Widget"));
-        Widget->resize(658, 623);
+        Widget->resize(789, 623);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(1);
         sizePolicy.setVerticalStretch(1);
@@ -65,6 +67,11 @@ public:
 
         widget_2 = new QWidget(Widget);
         widget_2->setObjectName(QStringLiteral("widget_2"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(1);
+        sizePolicy1.setHeightForWidth(widget_2->sizePolicy().hasHeightForWidth());
+        widget_2->setSizePolicy(sizePolicy1);
         verticalLayout = new QVBoxLayout(widget_2);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -79,19 +86,32 @@ public:
 
         verticalLayout->addWidget(pushButton_4);
 
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer_3);
+
+        label_3 = new QLabel(widget_2);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        verticalLayout->addWidget(label_3);
+
         comboBox = new QComboBox(widget_2);
         comboBox->setObjectName(QStringLiteral("comboBox"));
 
         verticalLayout->addWidget(comboBox);
 
-        pushButton_3 = new QPushButton(widget_2);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-
-        verticalLayout->addWidget(pushButton_3);
-
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
+
+        pushButton_3 = new QPushButton(widget_2);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        QFont font;
+        font.setBold(true);
+        font.setWeight(75);
+        pushButton_3->setFont(font);
+
+        verticalLayout->addWidget(pushButton_3);
 
         label = new QLabel(widget_2);
         label->setObjectName(QStringLiteral("label"));
@@ -123,9 +143,10 @@ public:
 
     void retranslateUi(QWidget *Widget)
     {
-        Widget->setWindowTitle(QApplication::translate("Widget", "Widget", Q_NULLPTR));
+        Widget->setWindowTitle(QApplication::translate("Widget", "Point in Polygon", Q_NULLPTR));
         pushButton->setText(QApplication::translate("Widget", "Load", Q_NULLPTR));
         pushButton_4->setText(QApplication::translate("Widget", "Set Point", Q_NULLPTR));
+        label_3->setText(QApplication::translate("Widget", "Analysis method:", Q_NULLPTR));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
          << QApplication::translate("Widget", "Winding", Q_NULLPTR)
