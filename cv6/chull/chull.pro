@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         widget.cpp \
     algorithms.cpp \
-    sortbyyasc.cpp
+    sortbyyasc.cpp \
+    sortbyxasc.cpp
 
 HEADERS += \
         widget.h \
     algorithms.h \
-    sortbyyasc.h
+    sortbyyasc.h \
+    sortbyxasc.h
 
 FORMS += \
         widget.ui
