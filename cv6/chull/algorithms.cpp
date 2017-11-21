@@ -37,7 +37,6 @@ double algorithms::getAngle(QPoint &p1,QPoint &p2,QPoint &p3, QPoint &p4)
     double normU = sqrt(ux * ux + uy * uy);
     double normV = sqrt(vx * vx + vy * vy);
 
-    double test =  (acos(s/(normU * normV)))*(180/M_PI);
     return fabs(acos(s/(normU * normV)))*(180/M_PI);
 }
 
@@ -225,7 +224,7 @@ std::vector<QPoint> algorithms::incr(std::vector<QPoint> points)
     n[1]=0;
 
     //Position of q[2] according to q[0], q[1]
-    if( getPosition(points[2],points[0],points[1] == 1 )
+    if( getPosition(points[2],points[0],points[1]) == 1 )
     {
         n[1] = 2;
         n[2] = 0;
