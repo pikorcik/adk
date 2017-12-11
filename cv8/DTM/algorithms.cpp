@@ -254,4 +254,129 @@ QPoint3D Algorithms::getConPoint(QPoint3D &p1, QPoint3D &p2, double z)
 
 }
 
+std::vector<Edge> Algorithms::createContours(std::vector<Edge> &dt, double zmin, double zmax, double h)
+{
+    std::vector<Edge> contours;
+    double eps = 5e-4;
+
+    for(int i=0; i<dt.size()-2; i=i+3){
+
+        //Get triangle vertices
+        QPoint3D p1=dt[i].getStart();
+        QPoint3D p2=dt[i].getEnd();
+        QPoint3D p3=dt[i+2].getStart();
+
+        //Create all contour lines for given triangle
+        for(double z = zmin; z <= zmax; z+=h)
+        {
+            //Get height differences between points and plane
+            double dz1 = p1.getZ() - z;
+            double dz2 = p2.getZ() - z;
+            double dz3 = p3.getZ() - z;
+
+            //Points in the plane?
+            bool b1 = (fabs(dz1)<eps);
+            bool b2 = (fabs(dz2)<eps);
+            bool b3 = (fabs(dz3)<eps);
+
+            //Edges in the plane
+            bool b12 = b1 && b2;
+            bool b23 = b2 && b3;
+            bool b31 = b3 && b1;
+
+            //Edges intersected by the plane
+            bool bi12 = dz1 * dz2 <0;
+            bool bi23 = dz2 * dz3 <0;
+            bool bi31 = dz3 * dz1 <0;
+
+            // case 1 - triangle is coplanar
+            if (b12 && b23 )
+                continue;
+
+            // case 2 -  triangle edge colinear
+            else if(b12 || b23 || b31){
+                //First triangle edge is colinear
+                if(b12)
+                {
+                    contours.push_back(dt[i]);
+                }
+
+                //Second triangle edge is colinear
+                else if(b23)
+                {
+                    contours.push_back(dt[i+1]);
+                }
+
+                //Third triangle edge is colinear
+                else
+                {
+                    contours.push_back(dt[i+2]);
+                }
+
+            }
+
+            //case 3 - onlz one point lies on plane
+            else if(b1||b2||b3)
+                continue;
+
+            // case 4 - contour line passing through a point and intersecting edge
+            else if(b1 && bi23 || b2 && bi31  || b3 && bi12){
+                //p1 x (p2,p3)
+                if(b1 && bi23)
+                {
+                    QPoint3D i23 = getConPoint(p2,p3,z);
+                    contours.push_back(Edge(p1,i23));
+                }
+                //p2 x (p3,p1)
+                else if(b2 && bi31)
+                {
+                    QPoint3D i31 = getConPoint(p3,p1,z);
+                    contours.push_back(Edge(p2,i31));
+                }
+                //p3 x (p1,p2)
+                else if(b3 && bi12)
+                {
+                    QPoint3D i12 = getConPoint(p1,p2,z);
+                    contours.push_back(Edge(p3,i12));
+                }
+            }
+
+            // case 5 - contour line intersects both edges
+            else if(bi12 && bi31 || bi23 && bi12 || bi23 && bi31)
+            {
+                    //(p1,p2) x (p3,p1)
+                    if(bi12 && bi31)
+                    {
+                        QPoint3D i12 = getConPoint(p1,p2,z);
+                        QPoint3D i31 = getConPoint(p3,p1,z);
+
+                        contours.push_back(Edge(i12,i31));
+                    }
+
+                    //(p2,p3) x (p1,p2)
+                    else if(bi23 && bi12)
+                    {
+                        QPoint3D i23 = getConPoint(p2,p3,z);
+                        QPoint3D i12 = getConPoint(p1,p2,z);
+
+                        contours.push_back(Edge(i23,i12));
+                    }
+
+                    //(p2,p3) x (p3,p1)
+                    else if(bi23 && bi31)
+                    {
+                        QPoint3D i23 = getConPoint(p2,p3,z);
+                        QPoint3D i31 = getConPoint(p3,p1,z);
+
+                        contours.push_back(Edge(i23,i31));
+                    }
+                }
+            }
+        }
+
+
+    return contours;
+
+}
+
 

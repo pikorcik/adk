@@ -17,6 +17,7 @@ public:
     static std::vector<Edge> dt(std::vector <QPoint3D> &points);
     static QPoint3D getConPoint(QPoint3D &p1,QPoint3D &p2, double z);
 
+    static std::vector<Edge> createContours(std::vector<Edge>&dt, double zmin, double zmax, double h);
 };
 
 #endif // ALGORITHMS_H
