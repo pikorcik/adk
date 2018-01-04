@@ -28,13 +28,17 @@ SOURCES += \
         widget.cpp \
     qpoint3d.cpp \
     edge.cpp \
-    algorithms.cpp
+    algorithms.cpp \
+    sortbyxasc.cpp \
+    triangle.cpp
 
 HEADERS += \
         widget.h \
     qpoint3d.h \
     edge.h \
-    algorithms.h
+    algorithms.h \
+    sortbyxasc.h \
+    triangle.h
 
 FORMS += \
         widget.ui
