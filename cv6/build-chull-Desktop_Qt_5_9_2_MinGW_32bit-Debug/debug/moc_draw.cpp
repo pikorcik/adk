@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../../ADK2017/SK1/Uloha1/Ver1.0/PointInPolygon/draw.h"
+#include "../../../../ADK2017/SK1/Uloha2/chull/draw.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
