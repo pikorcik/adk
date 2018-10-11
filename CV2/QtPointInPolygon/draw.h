@@ -7,10 +7,11 @@
 class Draw : public QWidget
 {
     Q_OBJECT
+
 private:
-    bool draw_point;
-    QPoint q;
-    std::vector<QPoint> pol;
+    bool draw_point;                //Switch, whether to draw a point or a polygon
+    QPoint q;                       //The analyzed point q
+    std::vector<QPoint> pol;        //The polygon
 
 public:
     void paintEvent(QPaintEvent *e);
