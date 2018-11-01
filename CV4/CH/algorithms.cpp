@@ -1,6 +1,9 @@
+#include<cmath>
+#include<vector>
 #include "algorithms.h"
 #include "sortbyxasc.h"
 #include "sortbyyasc.h"
+
 
 Algorithms::Algorithms()
 {
@@ -100,4 +103,112 @@ QPolygon Algorithms::CHJarvis (vector<QPoint> &points)
 
     return ch;
 }
+
+double Algorithms::getPointLineDistance(QPoint &q, QPoint &a, QPoint &b)
+{
+    //Point and line distance
+    double x12 = b.x()-a.x();
+    double y12 = b.y()-a.y();
+
+    double y1a = q.y()-a.y();
+    double y2a = b.y()-q.y();
+
+    double numerator = -q.x()*y12 + a.x()*y2a + b.x()*y1a;
+    double denominator = sqrt(x12*x12 + y12*y12);
+
+    return fabs(numerator)/denominator;
+
+}
+
+QPolygon Algorithms::QHull (vector<QPoint> &points)
+{
+    //Create convex hull using the qhull procedure
+    QPolygon ch;
+    std::vector<QPoint> su, sl;
+
+    //Find q1, q3
+    std::sort(points.begin(), points.end(), SortByXAsc());
+    QPoint q1 = points[0];
+    QPoint q3 = points[points.size()-1];
+
+    // Add to SU,SL
+    su.push_back(q1);
+    su.push_back(q3);
+    sl.push_back(q1);
+    sl.push_back(q3);
+
+    //Splite to SU or SL
+    for(int i =0;i<points.size();i++)
+    {
+        // Add to SU
+        if(getPointLinePosition(points[i],q1,q3)==LEFT)
+        {
+            su.push_back(points[i]);
+        }
+
+        // Add to SL
+        if(getPointLinePosition(points[i],q1,q3)==RIGHT)
+        {
+            sl.push_back(points[i]);
+        }
+    }
+
+    //Add q3 to ch
+    ch.push_back(q3);
+
+    //Process SU
+    qh(1, 0, su, ch);
+
+    //Add q1 to ch
+    ch.push_back(q1);
+
+    //Process SL
+    qh(0, 1, sl, ch);
+
+    return ch;
+}
+
+void Algorithms::qh(int s, int e, vector<QPoint> &p, QPolygon &h)
+{
+    //Recursive procedure of qhull
+    int i_max = -1;
+    double d_max = 0;
+
+    //Browse all points
+    for(int i = 2; i<p.size(); i++)
+    {
+        //Is the point in the right half-plane?
+        if(getPointLinePosition(p[i], p[s], p[e])==RIGHT)
+        {
+           double d =  getPointLineDistance(p[i], p[s], p[e]);
+           //Remember the fardest point
+           if (d>d_max)
+           {
+                d_max = d;
+                i_max = i;
+           }
+        }
+    }
+
+    //Point in the half plain exist
+    if(i_max >1)
+    {
+        //Process first interval
+        qh(s,i_max,p,h);
+
+        //Add to CH
+        h.push_back(p[i_max]);
+
+        //Process second interval
+        qh(i_max,e,p,h);
+    }
+}
+
+
+
+
+
+
+
+
 

@@ -30,6 +30,8 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *label;
     QComboBox *comboBox;
+    QSpacerItem *verticalSpacer_3;
+    QLabel *label_2;
     QSpacerItem *verticalSpacer;
     QPushButton *pushButton;
     QSpacerItem *verticalSpacer_2;
@@ -70,6 +72,15 @@ public:
 
         verticalLayout->addWidget(comboBox);
 
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer_3);
+
+        label_2 = new QLabel(Widget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        verticalLayout->addWidget(label_2);
+
         verticalSpacer = new QSpacerItem(20, 100, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
@@ -105,6 +116,7 @@ public:
         comboBox->setItemText(1, QApplication::translate("Widget", "QHull", nullptr));
         comboBox->setItemText(2, QApplication::translate("Widget", "Sweep Line", nullptr));
 
+        label_2->setText(QString());
         pushButton->setText(QApplication::translate("Widget", "Create CH", nullptr));
         pushButton_2->setText(QApplication::translate("Widget", "Clear", nullptr));
     } // retranslateUi
