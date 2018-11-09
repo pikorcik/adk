@@ -32,10 +32,10 @@ void Widget::on_pushButton_clicked()
 
     //End time
     clock_t e = std::clock();
-    clock_t time = float (e - s) / CLOCKS_PER_SEC;
 
-    //Write time
-    ui->label_2->setText(QString::number(time));
+    //Time difference in miliseconds
+    clock_t time = e - s;
+    ui->label_2->setText(QString::number(time) + " ms");
 
     //Set and repaint
     ui->Canvas->setCH(ch);
