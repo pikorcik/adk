@@ -204,6 +204,101 @@ void Algorithms::qh(int s, int e, vector<QPoint> &p, QPolygon &h)
     }
 }
 
+QPolygon Algorithms::CHSweep (vector<QPoint> &points)
+{
+    //Create convex hull using the sweepline procedure
+    QPolygon ch;
+
+    //sort by X
+    std::sort(points.begin(), points.end(), SortByXAsc());
+
+    //Create list of predecessors
+    std::vector<int> p(points.size());
+
+    //Create list of successors
+    std::vector<int> n(points.size());
+/*
+    // create triangle from the first 3 points
+    if(getPointLinePosition(points[2],points[0], points[1])==LEFT){
+        n[0] = 1;
+        n[1] = 2;
+        n[2] = 0;
+
+        p[0] = 2;
+        p[1] = 0;
+        p[2] = 1;
+    }
+
+    else
+    {
+        n[0] = 2;
+        n[2] = 1;
+        n[1] = 0;
+
+        p[0] = 1;
+        p[2] = 0;
+        p[1] = 2;
+    }
+*/
+    //create an initial bi
+
+    n[0]=1;
+    n[1]=0;
+
+    p[0]=1;
+    p[1]=0;
+
+    for (int i=2; i<points.size();i++)
+    {
+        //Point in the upper halfplane
+        //Link i with predecessor/successor
+        if (getPointLinePosition(points[i], points[p[i-1]], points[i-1])==LEFT)
+        //if(points[i].y()>=points[i-1].y())
+        {
+            p[i]=i-1;
+            n[i]=n[i-1];
+        }
+
+        //Point in the lower halfplane
+        else
+        {
+            p[i]=p[i-1];
+            n[i]=i-1;
+        }
+
+        //Link predecessor/successor with i
+        n[p[i]] = i;
+        p[n[i]] = i;
+
+        //Fix upper tangent
+        while(getPointLinePosition(points[n[n[i]]], points[i], points[n[i]])==RIGHT)
+        {
+            n[i] = n[n[i]];
+            p[n[n[i]]] = i;
+        }
+
+        //Fix lower tangent
+        while(getPointLinePosition(points[p[p[i]]], points[i], points[p[i]])==LEFT)
+        {
+            n[p[p[i]]] = i;
+            p[i] = p[p[i]];
+
+        }
+    }
+
+    // Convert to polygon
+    ch.push_back(points[0]);
+    int i = n[0];
+
+    while (i != 0)
+    {
+       ch.push_back(points[i]);
+       i = n[i];
+    }
+
+    return ch;
+}
+
 
 
 
