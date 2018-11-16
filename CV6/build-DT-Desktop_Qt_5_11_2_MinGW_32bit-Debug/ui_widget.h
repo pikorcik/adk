@@ -24,7 +24,7 @@ class Ui_Widget
 {
 public:
     QHBoxLayout *horizontalLayout;
-    Draw *widget;
+    Draw *Canvas;
     QVBoxLayout *verticalLayout;
     QPushButton *pushButton;
     QSpacerItem *verticalSpacer;
@@ -42,15 +42,15 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        widget = new Draw(Widget);
-        widget->setObjectName(QStringLiteral("widget"));
+        Canvas = new Draw(Widget);
+        Canvas->setObjectName(QStringLiteral("Canvas"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(1);
         sizePolicy.setVerticalStretch(1);
-        sizePolicy.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
-        widget->setSizePolicy(sizePolicy);
+        sizePolicy.setHeightForWidth(Canvas->sizePolicy().hasHeightForWidth());
+        Canvas->setSizePolicy(sizePolicy);
 
-        horizontalLayout->addWidget(widget);
+        horizontalLayout->addWidget(Canvas);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
@@ -93,7 +93,7 @@ public:
 
     void retranslateUi(QWidget *Widget)
     {
-        Widget->setWindowTitle(QApplication::translate("Widget", "Widget", nullptr));
+        Widget->setWindowTitle(QApplication::translate("Widget", "DTM", nullptr));
         pushButton->setText(QApplication::translate("Widget", "Delaunay", nullptr));
         pushButton_2->setText(QApplication::translate("Widget", "DTM", nullptr));
         pushButton_3->setText(QApplication::translate("Widget", "Clear", nullptr));

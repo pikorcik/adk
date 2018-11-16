@@ -111,6 +111,8 @@ Makefile: ../DT/DT.pro C:/Qt/5.11.2/mingw53_32/mkspecs/win32-g++/qmake.conf C:/Q
 		C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_concurrent_private.pri \
 		C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_core.pri \
 		C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_core_private.pri \
+		C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_datavisualization.pri \
+		C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_datavisualization_private.pri \
 		C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_dbus.pri \
 		C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_dbus_private.pri \
 		C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_designer.pri \
@@ -280,6 +282,8 @@ C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_concurrent.pri:
 C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_concurrent_private.pri:
 C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_core.pri:
 C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_core_private.pri:
+C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_datavisualization.pri:
+C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_datavisualization_private.pri:
 C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_dbus.pri:
 C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_dbus_private.pri:
 C:/Qt/5.11.2/mingw53_32/mkspecs/modules/qt_lib_designer.pri:
